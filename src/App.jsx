@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Addmentee from "./pages/AddMentee";
 import UserList from "./pages/UserList";
+import MenteeLog from "./pages/MenteeLog";
 function App() {
   return (
     <BrowserRouter>
