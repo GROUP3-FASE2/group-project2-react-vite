@@ -7,7 +7,7 @@ import logo from "../assets/logo.png";
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-dark-alta ">
       <div className=" drawer drawer-mobile ">
         {/* ============= */}
         {/* SIDEBAR START */}
@@ -23,7 +23,7 @@ const Sidebar = () => {
         </div>
         <div className="drawer-side ">
           <label htmlFor="my-drawer-2 " className="drawer-overlay "></label>
-          <ul className="flex  menu p-4 w-80 bg-dark-alta text-white ">
+          <ul className="flex menu p-4 w-64  text-white ">
             <div className=" mx-auto mb-5 w-44">
               <img src={logo} alt="logo" />
             </div>
