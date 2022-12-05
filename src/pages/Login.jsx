@@ -8,7 +8,7 @@ import login from '../assets/bg-logo.png'
 const Login = () => {
     return (
         <Container>
-            <div className='flex flex-col w-full h-screen bg-dark-alta block'>
+            <div className='flex flex-col w-full h-screen bg-dark-alta'>
                 <div className='m-5 w-full'>
                     <img src={logo} alt="" className='w-32 mx-5' />
                 </div>
@@ -20,7 +20,7 @@ const Login = () => {
                     <img src={login} alt="" className='block m-auto' />
                 </div>
             </div>
-            <div className='flex flex-col w-full h-screen bg-dark-alta block'>
+            <div className='flex flex-col w-full h-screen bg-dark-alta'>
                 <div className='flex h-screen justify-center items-center'>
                     <LoginCard />
                 </div>
