@@ -1,6 +1,6 @@
 import React from "react";
-import ButtonNewLog from "../components/ButtonNewLog";
-import CardNewLog from "../components/CardNewLog";
+import ButtonCancel from "../components/ButtonCancel";
+import ButtonSave from "../components/ButtonSave";
 import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
@@ -9,38 +9,142 @@ const AddMentee = () => {
   return (
     <Container>
       <Sidebar />
-      <div className="flex flex-col w-full h-full m-5 ">
-        <Navbar namePages={"Mentee Log"} />
-        <div className="flex p-5 justify-between">
-          <div>
-            <p className="text-2xl">Rachman Kamil</p>
-            <p className="text-lg">Frontend Developer</p>
-            <p className="text-xl">IPA</p>
-            <p className="text-xl">SMA Negeri 4 Surabaya</p>
+      <div className="flex flex-col w-full">
+        <Navbar namePages={"Add New Mentee"} />
+        {/* START CONTENT HERE */}
+        <form className="text-md form-control mx-10 my-16 border-2 gap-3 text-dark-alta border-dark-alta rounded-md p-10">
+          <label className="flex flex-row justify-between items-center">
+            <span>Name</span>
+            <input
+              type="text"
+              placeholder="Name"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Address</span>
+            <input
+              type="text"
+              placeholder="Address"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Home Address</span>
+            <input
+              type="text"
+              placeholder="Home Address"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Email</span>
+            <input
+              type="email"
+              placeholder="Email"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row  items-center">
+            <span>Gender</span>
+            <div className="pl-32 items-center flex gap-3">
+              <input
+                type="radio"
+                name="radio-2"
+                className="radio radio-primary"
+                defaultChecked={true}
+              />
+              <span>Male</span>
+              <input
+                type="radio"
+                name="radio-2"
+                className="radio radio-primary"
+              />
+              <span>Female</span>
+            </div>
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Telegram</span>
+            <input
+              type="text"
+              placeholder="Telegram"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Phone</span>
+            <input
+              type="text"
+              placeholder="081312344321"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <span className="font-bold text-lg">Emergency Data</span>
+          <label className="flex flex-row justify-between items-center">
+            <span>Name</span>
+            <input
+              type="text"
+              placeholder="Name"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Phone</span>
+            <input
+              type="text"
+              placeholder="081312344321"
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Status</span>
+            <select className="select select-bordered w-full max-w-2xl">
+              <option selected>Saudara Kandung</option>
+              <option>Orang Tua</option>
+              <option>Paman</option>
+            </select>
+          </label>
+          <span className="font-bold text-lg">Education Data</span>
+          <label className="flex flex-row  items-center">
+            <span>Type</span>
+            <div className="pl-32 items-center flex gap-3">
+              <input
+                type="radio"
+                name="radio-2"
+                className="radio radio-primary"
+                defaultChecked={true}
+              />
+              <span>IT</span>
+              <input
+                type="radio"
+                name="radio-2"
+                className="radio radio-primary"
+              />
+              <span>NON-IT</span>
+            </div>
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Major</span>
+            <input
+              type="text"
+              placeholder=""
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <label className="flex flex-row justify-between items-center">
+            <span>Graduate</span>
+            <input
+              type="text"
+              placeholder=""
+              className="input input-bordered max-w-2xl w-full"
+            />
+          </label>
+          <div className="flex justify-end gap-5 py-5">
+            <ButtonCancel />
+            <ButtonSave />
           </div>
-          <div className="p-3">
-            <p>
-              Phone: <span>081312344321</span>
-            </p>
-            <p>
-              Telegram: <span>@rachmankamil</span>
-            </p>
-            <p>
-              Discord: <span>@rachmankamil#2473</span>
-            </p>
-            <p>
-              Email <span>rachmankamil31@gmail.com</span>
-            </p>
-          </div>
-        </div>
-        <div className="pt-12 text-right">
-          <ButtonNewLog />
-        </div>
-        <div className="flex flex-col gap-5 pt-5">
-          <CardNewLog />
-          <CardNewLog />
-          <CardNewLog />
-        </div>
+        </form>
+        {/* END CONTENT HERE */}
       </div>
     </Container>
   );
