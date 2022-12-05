@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Addmentee from "./pages/AddMentee";
 import Sample1 from "./pages/Sample1";
@@ -10,6 +11,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
+        <Route path="/" element={<Dashboard />} />
         <Route path="/" element={<Login />} />
         <Route path="/1" element={<Sample1 />} />
         <Route path="/2" element={<Sample2 />} />
