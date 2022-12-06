@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardDashboard from "../components/CardDashBoard";
-import Chart from "../components/Chart";
+import axios from "axios";
+import jwt_decode from "jwt-decode"
 import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
@@ -15,6 +16,24 @@ import {
 } from "recharts";
 
 const Dashboard = () => {
+
+  const [name, setName] = useState('')
+  const [token, setToken] = useState('')
+
+  const refreshToken = async () => {
+    try {
+      const response = await axios.get(`http://35.194.55.171:8000/auth`)
+      setToken(response.data.accesToken)
+      const decode = jwt_decode(response.data.accesToken)
+      setName(decode.name)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    refreshToken()
+  }, [])
 
   const data = [
     { name: "Aprli", Register: 1000, Placement: 2000, Graduates: 1000 },
@@ -31,6 +50,7 @@ const Dashboard = () => {
         {/* START CONTENT HERE */}
 
         <div>
+          <h1>{name}</h1>
           <CardDashboard />
           <div className="flex justify-center">
             <div className="text-center">

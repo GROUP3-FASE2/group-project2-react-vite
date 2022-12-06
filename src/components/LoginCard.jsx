@@ -1,18 +1,18 @@
 import React from 'react'
 
-const LoginCard = () => {
+const LoginCard = ({ value, change, click }) => {
     return (
         <div className='flex flex-col justify-center w-[400px]'>
             <form className='w-full mx-auto rounded-lg bg-white p-8 px-8 h-[500px]'>
                 <h2 className='text-4xl text-dark-alta font-bold'>Login</h2>
                 <p className='text-sm text-dark-alta font-semibold mt-5 mb-10'>Sign in with your with your account</p>
                 <div className='flex flex-col py-2'>
-                    <label className='font-semibold text-dark-alta '>Email</label>
-                    <input className='rounded-lg bg-white mt-2 p-2 border-2 border-dark-alta focus:outline-none text-dark-alta' type="email" placeholder="yourname@email.com"/>
+                    <label className='font-semibold text-dark-alta' value={value} onChange={change}>Email</label>
+                    <input className='rounded-lg bg-white mt-2 p-2 border-2 border-dark-alta focus:outline-none text-dark-alta' type="email" placeholder="yourname@email.com" />
                 </div>
                 <div className='flex flex-col text-gray-400 py-2'>
                     <label className='font-semibold text-dark-alta'>Password</label>
-                    <input className='p-2 rounded-lg bg-white mt-2 p-2 border-2 border-dark-alta focus:outline-none text-dark-alta' type="password" placeholder="Password" />
+                    <input className='p-2 rounded-lg bg-white mt-2 border-2 border-dark-alta focus:outline-none text-dark-alta' type="password" placeholder="Password" />
                 </div>
                 <div className='flex justify-between text-gray-400 py-2'>
                     <p className='flex items-center text-dark-alta'><input className='mr-2 text-dark-alta' type="checkbox" />Remember Me</p>
