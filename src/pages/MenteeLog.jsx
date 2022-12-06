@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ButtonNewLog from "../components/ButtonNewLog";
 import CardNewLog from "../components/CardNewLog";
 import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+import { useDispatch } from "react-redux";
+import { clearUser } from '../store/features/usersSlice'
 
 const MenteeLog = () => {
+
+  const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!cookies.userToken) {
+      dispatch(clearUser())
+      navigate("/")
+    }
+  }, [cookies.userToken])
+
   return (
     <Container>
       <Sidebar />

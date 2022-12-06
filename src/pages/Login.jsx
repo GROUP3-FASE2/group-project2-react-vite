@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '../components/Container'
 import logo from '../assets/logo.png'
 import login from '../assets/bg-logo.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { updateUser } from '../store/features/usersSlice'
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
 
@@ -11,6 +14,8 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [msg, setMsg] = useState('')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [cookies, setCookie] = useCookies(['userToken']);
 
     const authLogin = async (e) => {
         e.preventDefault()
@@ -19,14 +24,28 @@ const Login = () => {
             password: password
         })
             .then((response) => {
-                console.log(response)
+                const { data } = response.data
+                if (data) {
+                    setCookie('userToken', data.token, { path: '/' });
+                    dispatch(updateUser(data))
+                    navigate("/dashboard")
+                }
             })
-            // navigate("/dashboard")
+
             .catch((error) => {
                 console.log("err msg :", error)
                 setMsg(error)
             })
     }
+
+    useEffect(() => {
+        if (cookies.userToken) {
+            navigate("/dashboard")
+        }
+        return () => {
+        }
+    }, [cookies.userToken])
+
 
     return (
         <Container>

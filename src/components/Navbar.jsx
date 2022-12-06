@@ -1,6 +1,8 @@
 import React from "react";
 
-const Navbar = ({ namePages }) => {
+
+const Navbar = ({ namePages, onLogout }) => {
+
   return (
     <div className="w-full overflow-hidden ">
       <div className="flex flex-col p-5">
@@ -9,9 +11,12 @@ const Navbar = ({ namePages }) => {
         </p>
         <div className="flex justify-between">
           <p className="text-xl font-bold text-orange-alta ">{namePages}</p>
-          <p className="text-xl text-dark-alta/50 ">
-            Hello, <span className="text-dark-alta font-bold">John doe</span>
-          </p>
+          <div className="flex space-x-4 items-center">
+            <p className="text-xl text-dark-alta/50 ">
+              Hello, <span className="text-dark-alta font-bold">John doe</span>
+            </p>
+            <button className="btn" onClick={onLogout}>Log out</button>
+          </div>
         </div>
       </div>
       <div className="mx-5">
