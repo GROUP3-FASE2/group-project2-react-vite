@@ -20,14 +20,13 @@ const Login = () => {
         })
             .then((response) => {
                 console.log(response)
-            })
-            // navigate("/dashboard")
+                // navigate('/dashboard')
+            })            
             .catch((error) => {
                 console.log("err msg :", error)
                 setMsg(error)
             })
     }
-
     return (
         <Container>
             <div className='flex flex-col w-full h-screen bg-dark-alta'>
@@ -70,7 +69,7 @@ const Login = () => {
                                 <p className='flex items-center text-dark-alta'><input className='mr-2 text-dark-alta' type="checkbox" />Remember Me</p>
                                 <a href=""><p className='text-dark-alta'>Forgot Password</p></a>
                             </div>
-                            <button type="submit" className='w-full mt-10 py-2 bg-orange-alta shadow-lg text-white font-semibold rounded-lg' >LOGIN</button>
+                            <button type="submit" className='w-full mt-10 py-2 bg-orange-alta shadow-lg text-white font-semibold rounded-lg' onCl>LOGIN</button>
                         </form>
                     </div>
                 </div>

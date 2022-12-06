@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar'
 import GeneralSearch from '../components/GeneralSearch'
 import ButtonNxtPrv from '../components/ButtonNxtPrv'
 import TableMenteeList from '../components/TableMenteeList'
+import MenteeFilter from '../components/MenteeFilter'
 
 const MenteeList = () => {
     return (
@@ -14,6 +15,7 @@ const MenteeList = () => {
             <div className='flex flex-col w-full h-full m-5'>
                 <Navbar />
                 <GeneralSearch />
+                <MenteeFilter />
                 <div className='mt-5'>
                     <TableMenteeList />
                 </div>
