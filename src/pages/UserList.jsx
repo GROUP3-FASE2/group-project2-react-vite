@@ -4,6 +4,7 @@ import Container from '../components/Container'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import TableUserList from '../components/TableUserList'
+import GeneralSearch from "../components/GeneralSearch";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import { useDispatch } from "react-redux";
@@ -27,6 +28,7 @@ const UserList = () => {
             <Sidebar />
             <div className="flex flex-col w-full h-full m-5 ">
                 <Navbar namePages={"User List"} />
+                <GeneralSearch />
                 <div>
                     <TableUserList />
                 </div>

@@ -24,7 +24,7 @@ const Sidebar = () => {
         </div>
         <div className="drawer-side ">
           <label htmlFor="my-drawer-2 " className="drawer-overlay "></label>
-          <ul className="flex menu p-4 w-64  text-white  ">
+          <ul className="flex menu p-4 w-64 text-white  ">
             <div className=" mx-auto mb-5 w-44">
               <img src={logo} alt="logo" />
             </div>
