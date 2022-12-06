@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { persistStore } from 'redux-persist';
-import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux'
-import { CookiesProvider } from 'react-cookie';
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
+import { CookiesProvider } from "react-cookie";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Addmentee from "./pages/AddMentee";
@@ -29,6 +29,7 @@ function App() {
               <Route path="/menteelist" element={<MenteeList />} />
               <Route path="/menteelog" element={<MenteeLog />} />
               <Route path="/addmentee" element={<Addmentee />} />
+              <Route path="/*" element={<Dashboard />} />
             </Routes>
           </BrowserRouter>
         </CookiesProvider>
