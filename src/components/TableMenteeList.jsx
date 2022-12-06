@@ -69,13 +69,13 @@ const TableMenteeList = () => {
                             </thead>
                             <tbody className="divide-y divide-gray-200">
                                 <tr>
-                                    <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap text-center">
+                                    <td className="px-6 py-4 text-sm font-medium text-black whitespace-nowrap text-center">
                                         1
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap text-center">
+                                    <td className="px-6 py-4 text-sm text-black whitespace-nowrap text-center">
                                         Jone Doe
                                     </td>
-                                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap text-center">
+                                    <td className="px-6 py-4 text-sm text-black whitespace-nowrap text-center">
                                         BE 7
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap text-center">
@@ -92,7 +92,7 @@ const TableMenteeList = () => {
                                             className="text-[#053260] hover:text-[#053260] flex justify-center"
                                             href="#"
                                         >
-                                            <MdBook />
+                                            <MdBook size={20}/>
                                         </a>
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap text-center">
@@ -100,7 +100,7 @@ const TableMenteeList = () => {
                                             className="text-[#C12A7C] hover:text-[#C12A7C] flex justify-center "
                                             href="#"
                                         >
-                                            <BiEditAlt />
+                                            <BiEditAlt size={20}/>
                                         </a>
                                     </td>
 
@@ -109,7 +109,7 @@ const TableMenteeList = () => {
                                             className="text-[#053260] hover:text-[#053260] flex justify-center"
                                             href="#"
                                         >
-                                            <MdDeleteForever />
+                                            <MdDeleteForever size={20}/>
                                         </a>
                                     </td>
                                 </tr>
@@ -137,7 +137,7 @@ const TableMenteeList = () => {
                                             className="text-[#053260] hover:text-[#053260] flex justify-center"
                                             href="#"
                                         >
-                                            <MdBook />
+                                            <MdBook size={20}/>
                                         </a>
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap text-center">
@@ -145,7 +145,7 @@ const TableMenteeList = () => {
                                             className="text-[#C12A7C] hover:text-[#C12A7C] flex justify-center "
                                             href="#"
                                         >
-                                            <BiEditAlt />
+                                            <BiEditAlt size={20}/>
                                         </a>
                                     </td>
 
@@ -154,7 +154,7 @@ const TableMenteeList = () => {
                                             className="text-[#053260] hover:text-[#053260] flex justify-center"
                                             href="#"
                                         >
-                                            <MdDeleteForever />
+                                            <MdDeleteForever size={20}/>
                                         </a>
                                     </td>
                                 </tr>
