@@ -4,6 +4,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { BsDoorOpenFill } from "react-icons/bs";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -28,31 +29,39 @@ const Sidebar = () => {
               <img src={logo} alt="logo" />
             </div>
             <hr />
-            <li className="flex justify-start">
-              <a className="">
-                <AiFillHome className="text-2xl " />
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a>
-                <FaUserAlt className="text-2xl" />
-                Mentee
-              </a>
-            </li>
+            <Link to={"/dashboard"}>
+              <li className="flex justify-start">
+                <a className="">
+                  <AiFillHome className="text-2xl " />
+                  Dashboard
+                </a>
+              </li>
+            </Link>
+            <Link to={"/menteelist"}>
+              <li>
+                <a>
+                  <FaUserAlt className="text-2xl" />
+                  Mentee
+                </a>
+              </li>
+            </Link>
             <hr />
-            <li>
-              <a>
-                <FaUsers className="text-2xl" />
-                Users
-              </a>
-            </li>
-            <li>
-              <a>
-                <BsDoorOpenFill className="text-2xl" />
-                Class
-              </a>
-            </li>
+            <Link to={"/userlist"}>
+              <li>
+                <a>
+                  <FaUsers className="text-2xl" />
+                  Users
+                </a>
+              </li>
+            </Link>
+            <Link to={"/classlist"}>
+              <li>
+                <a>
+                  <BsDoorOpenFill className="text-2xl" />
+                  Class
+                </a>
+              </li>
+            </Link>
           </ul>
         </div>
         {/* =========== */}
