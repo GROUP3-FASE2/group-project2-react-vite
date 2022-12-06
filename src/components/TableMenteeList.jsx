@@ -78,16 +78,16 @@ const TableMenteeList = () => {
                                     <td className="px-6 py-4 text-sm text-black whitespace-nowrap text-center">
                                         BE 7
                                     </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap text-center">
+                                    <td className="px-6 py-4 text-sm font-medium  whitespace-nowrap text-center">
                                         Active
                                     </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap text-center">
+                                    <td className="px-6 py-4 text-sm font-medium  whitespace-nowrap text-center">
                                         IT
                                     </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap text-center">
+                                    <td className="px-6 py-4 text-sm font-medium  whitespace-nowrap text-center">
                                         Male
                                     </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-left whitespace-nowrap text-center">
+                                    <td className="px-6 py-4 text-sm font-medium  whitespace-nowrap text-center">
                                         <a
                                             className="text-[#053260] hover:text-[#053260] flex justify-center"
                                             href="#"

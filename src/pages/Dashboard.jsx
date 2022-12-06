@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CardDashboard from "../components/CardDashBoard";
 import axios from "axios";
 import jwt_decode from "jwt-decode"
@@ -14,26 +14,32 @@ import {
   CartesianGrid,
   Line,
 } from "recharts";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+import { useDispatch } from "react-redux";
+import { clearUser } from '../store/features/usersSlice'
 
 const Dashboard = () => {
 
-  const [name, setName] = useState('')
-  const [token, setToken] = useState('')
-
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get(`http://35.194.55.171:8000/auth`)
-      setToken(response.data.token)
-      const decode = jwt_decode(response.data.token)
-      setName(decode.name)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    refreshToken()
-  }, [])
+    if (!cookies.userToken) {
+      dispatch(clearUser())
+      navigate("/")
+    }
+  }, [cookies.userToken])
+
+  const onLogout = useCallback(
+    () => {
+      dispatch(clearUser())
+      removeCookie("userToken")
+    },
+    [],
+  )
+
 
   const data = [
     { name: "Aprli", Register: 1000, Placement: 2000, Graduates: 1000 },
@@ -46,7 +52,9 @@ const Dashboard = () => {
     <Container>
       <Sidebar />
       <div className="flex flex-col w-full">
-        <Navbar />
+        <Navbar
+          onLogout={onLogout}
+        />
         {/* START CONTENT HERE */}
 
         <div>

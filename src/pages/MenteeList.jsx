@@ -1,14 +1,32 @@
-import React from 'react'
-
+import React, { useCallback, useEffect, useState } from "react";
 import Container from '../components/Container'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import GeneralSearch from '../components/GeneralSearch'
 import ButtonNxtPrv from '../components/ButtonNxtPrv'
 import TableMenteeList from '../components/TableMenteeList'
+
+import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+import { useDispatch } from "react-redux";
+import { clearUser } from '../store/features/usersSlice'
+=======
 import MenteeFilter from '../components/MenteeFilter'
 
+
 const MenteeList = () => {
+
+    const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!cookies.userToken) {
+            dispatch(clearUser())
+            navigate("/")
+        }
+    }, [cookies.userToken])
+
     return (
         <Container>
             <Sidebar />
