@@ -23,8 +23,8 @@ const Dashboard = () => {
   const refreshToken = async () => {
     try {
       const response = await axios.get(`http://35.194.55.171:8000/auth`)
-      setToken(response.data.accesToken)
-      const decode = jwt_decode(response.data.accesToken)
+      setToken(response.data.token)
+      const decode = jwt_decode(response.data.token)
       setName(decode.name)
     } catch (error) {
       console.log(error)
