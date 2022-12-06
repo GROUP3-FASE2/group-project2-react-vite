@@ -22,11 +22,21 @@ const MenteeLog = () => {
     }
   }, [cookies.userToken])
 
+  const onLogout = useCallback(
+    () => {
+      dispatch(clearUser())
+      removeCookie("userToken")
+    },
+    [],
+  )
+
   return (
     <Container>
       <Sidebar />
       <div className="flex flex-col w-full h-full m-5 ">
-        <Navbar namePages={"Mentee Log"} />
+        <Navbar 
+        onLogout={onLogout}
+        namePages={"Mentee Log"} />
         <div className="flex p-5 justify-between">
           <div>
             <p className="text-2xl">
@@ -53,6 +63,7 @@ const MenteeLog = () => {
           </div>
         </div>
         <div className="pt-12 text-right">
+        <div className="bg-orange-alta w-30 border-none text-white btn mr-2" onClick={() => navigate('/menteelist')}>Back</div>
           <ButtonNewLog />
         </div>
         <div className="flex flex-col gap-5 pt-5">

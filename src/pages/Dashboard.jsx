@@ -40,7 +40,6 @@ const Dashboard = () => {
     [],
   )
 
-
   const data = [
     { name: "Aprli", Register: 1000, Placement: 2000, Graduates: 1000 },
     { name: "May", Register: 2000, Placement: 1500, Graduates: 2000 },
@@ -51,9 +50,10 @@ const Dashboard = () => {
   return (
     <Container>
       <Sidebar />
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full m-5">
         <Navbar
           onLogout={onLogout}
+          namePages={'Dashboard'}
         />
         {/* START CONTENT HERE */}
 
