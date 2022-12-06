@@ -1,11 +1,42 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import Container from '../components/Container'
-import LoginCard from '../components/LoginCard'
 import logo from '../assets/logo.png'
 import login from '../assets/bg-logo.png'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [msg, setMsg] = useState('')
+    const navigate = useNavigate()
+
+    const authLogin = async (e) => {
+        e.preventDefault()
+        try {
+            console.log("this email: ", email)
+            console.log("this password: ", password)
+            await axios.post(`http://35.194.55.171:8000/auth`, {
+
+                email: email,
+                password: password
+
+            });
+            navigate("/dashboard")
+        } catch (error) {
+            console.log("err msg :", error)
+            setMsg(error)
+        }
+    }
+    const handleChangeEmail = () => {
+        setEmail(e.target.value)
+    }
+
+    const handleChangePassword = () => {
+        setPassword(e.target.value)
+    }
+
     return (
         <Container>
             <div className='flex flex-col w-full h-screen bg-dark-alta'>
@@ -21,8 +52,36 @@ const Login = () => {
                 </div>
             </div>
             <div className='flex flex-col w-full h-screen bg-dark-alta'>
+                {/* <div>
+                    <form>
+                        <div>
+                            <label>Email</label>
+                            <input />
+                        </div>
+                    </form>
+                </div> */}
                 <div className='flex h-screen justify-center items-center'>
-                    <LoginCard />
+                    <div className='flex flex-col justify-center w-[400px]'>
+                        <form className='w-full mx-auto rounded-lg bg-white p-8 px-8 h-[500px]' onSubmit={authLogin}>
+                            <h2 className='text-4xl text-dark-alta font-bold'>Login</h2>
+                            {/* <p className='text-center'>{msg}</p> */}
+                            <p className='text-sm text-dark-alta font-semibold mt-5 mb-10'>Sign in with your with your account</p>
+                            <p className='text-center text-red-500'>{msg}</p>
+                            <div className='flex flex-col py-2'>
+                                <label className='font-semibold text-dark-alta' >Email</label>
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} className='rounded-lg bg-white mt-2 p-2 border-2 border-dark-alta focus:outline-none text-dark-alta' type="email" placeholder="yourname@email.com" />
+                            </div>
+                            <div className='flex flex-col text-gray-400 py-2'>
+                                <label className='font-semibold text-dark-alta'>Password</label>
+                                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className='p-2 rounded-lg bg-white mt-2 border-2 border-dark-alta focus:outline-none text-dark-alta' placeholder="Password" />
+                            </div>
+                            <div className='flex justify-between text-gray-400 py-2'>
+                                <p className='flex items-center text-dark-alta'><input className='mr-2 text-dark-alta' type="checkbox" />Remember Me</p>
+                                <a href=""><p className='text-dark-alta'>Forgot Password</p></a>
+                            </div>
+                            <button type="submit" className='w-full mt-10 py-2 bg-orange-alta shadow-lg text-white font-semibold rounded-lg' >LOGIN</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </Container>

@@ -1,7 +1,5 @@
 import React from 'react'
-import ButtonNewLog from '../components/ButtonNewLog'
 import ButtonNxtPrv from '../components/ButtonNxtPrv'
-import CardNewLog from '../components/CardNewLog'
 import Container from '../components/Container'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
