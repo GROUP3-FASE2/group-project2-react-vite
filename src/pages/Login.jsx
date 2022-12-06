@@ -14,27 +14,18 @@ const Login = () => {
 
     const authLogin = async (e) => {
         e.preventDefault()
-        try {
-            console.log("this email: ", email)
-            console.log("this password: ", password)
-            await axios.post(`http://35.194.55.171:8000/auth`, {
-
-                email: email,
-                password: password
-
-            });
-            navigate("/dashboard")
-        } catch (error) {
-            console.log("err msg :", error)
-            setMsg(error)
-        }
-    }
-    const handleChangeEmail = () => {
-        setEmail(e.target.value)
-    }
-
-    const handleChangePassword = () => {
-        setPassword(e.target.value)
+        await axios.post(`http://35.194.55.171:8000/auth`, {
+            email: email,
+            password: password
+        })
+            .then((response) => {
+                console.log(response)
+            })
+            // navigate("/dashboard")
+            .catch((error) => {
+                console.log("err msg :", error)
+                setMsg(error)
+            })
     }
 
     return (
