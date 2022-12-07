@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Navbar = ({ namePages, onLogout }) => {
+const Navbar = ({ namePages, onLogout, userName }) => {
 
   return (
     <div className="w-full overflow-hidden ">
@@ -13,7 +13,7 @@ const Navbar = ({ namePages, onLogout }) => {
           <p className="text-xl font-bold text-orange-alta ">{namePages}</p>
           <div className="flex space-x-4 items-center">
             <p className="text-xl text-dark-alta/50 ">
-              Hello, <span className="text-dark-alta font-bold">John doe</span>
+              Hello, <span className="text-dark-alta font-bold">{userName}</span>
             </p>
             <button className="btn bg-dark-alta border-none mt-2 p-2 mr-5 text-white" onClick={onLogout}>Log out</button>
           </div>

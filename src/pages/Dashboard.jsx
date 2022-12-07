@@ -15,17 +15,55 @@ import {
   Line,
 } from "recharts";
 import { useNavigate } from "react-router-dom";
+
+import { useCookies } from 'react-cookie';
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser } from '../store/features/usersSlice'
+
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../store/features/usersSlice";
 import Swal from "sweetalert2";
 
+
+
+
+
 const Dashboard = () => {
+
+  const [listUser, setListUser] = useState('')
+  const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const currentUsers = useSelector((state) => state.users.currentUser)
+  console.log("currentUsers :", currentUsers)
+
+
+  // axios.interceptors.request.use(
+  //   config => {
+  //     config.headers.authorization = `barer ${cookies.userToken}`
+  //     return config
+  //   },
+  // )
+
+  const getUser = async () => {
+    await axios.get(`http://34.136.159.229:8000/users`)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
   useEffect(() => {
+    getUser();
     if (!cookies.userToken) {
       dispatch(clearUser());
       navigate("/");
@@ -57,11 +95,21 @@ const Dashboard = () => {
     { name: "July", Register: 1000, Placement: 400, Graduates: 900 },
   ];
 
+
+
   return (
     <Container>
       <Sidebar />
+
+      <div className="flex flex-col w-full">
+        <Navbar
+          onLogout={onLogout}
+          userName={currentUsers.full_name}
+        />
+
       <div className="flex flex-col w-full m-5">
         <Navbar onLogout={onLogout} namePages={"Dashboard"} />
+
         {/* START CONTENT HERE */}
 
         <div>

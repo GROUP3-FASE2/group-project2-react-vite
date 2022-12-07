@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from '../store/features/usersSlice'
 
 const AddMentee = () => {
@@ -14,6 +14,8 @@ const AddMentee = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const currentUsers = useSelector((state) => state.users.currentUser)
+  console.log("this:", currentUsers)
 
   useEffect(() => {
     if (!cookies.userToken) {
@@ -29,13 +31,28 @@ const AddMentee = () => {
     [],
   )
 
+  const onLogout = useCallback(
+    () => {
+      dispatch(clearUser())
+      removeCookie("userToken")
+    },
+    [],
+  )
+
   return (
     <Container>
       <Sidebar />
       <div className="flex flex-col w-full">
+
+        <Navbar namePages={"Add New Mentee"}
+          onLogout={onLogout}
+          userName={currentUsers.full_name}
+        />
+
         <Navbar 
         onLogout={onLogout}
         namePages={"Add New Mentee"} />
+
         {/* START CONTENT HERE */}
         <form className="text-md form-control mx-10 my-16 border-2 gap-3 text-dark-alta border-dark-alta rounded-md p-10">
           <label className="flex flex-row justify-between items-center">
