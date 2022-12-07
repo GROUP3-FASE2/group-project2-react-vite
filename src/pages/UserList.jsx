@@ -4,13 +4,13 @@ import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 // import TableUserList from "../components/TableUserList";
-import GeneralSearch from "../components/GeneralSearch";
+import GeneralSearchUser from "../components/GeneralSearchUser";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../store/features/usersSlice";
-import { MdDeleteForever } from 'react-icons/md';
-import { BiEditAlt } from 'react-icons/bi';
+import { MdDeleteForever } from "react-icons/md";
+import { BiEditAlt } from "react-icons/bi";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -61,7 +61,7 @@ const UserList = () => {
           text: "Logout successfully",
           showConfirmButton: false,
           timer: 1500,
-      });
+        });
         dispatch(clearUser());
         removeCookie("userToken");
         navigate("/");
@@ -78,7 +78,7 @@ const UserList = () => {
           onLogout={onLogout}
           userName={currentUsers.full_name}
         />
-        <GeneralSearch />
+        <GeneralSearchUser />
         <div className="flex flex-col mt-5">
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle">
@@ -177,14 +177,11 @@ const UserList = () => {
                               </a>
                             </td>
                           </tr>
-                        )
+                        );
                       })
                     ) : (
-                      <div>
-
-                      </div>
-                    )
-                    }
+                      <div></div>
+                    )}
                   </tbody>
                 </table>
               </div>
