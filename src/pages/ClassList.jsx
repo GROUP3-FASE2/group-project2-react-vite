@@ -36,7 +36,7 @@ const ClassList = () => {
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser());
-      navigate("/*");
+      navigate("/");
     }
     getData();
   }, [cookies.userToken]);
