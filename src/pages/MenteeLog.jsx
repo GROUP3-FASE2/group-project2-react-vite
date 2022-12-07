@@ -18,7 +18,7 @@ const MenteeLog = () => {
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser())
-      navigate("/")
+      navigate("/*")
     }
   }, [cookies.userToken])
 
@@ -26,6 +26,7 @@ const MenteeLog = () => {
     () => {
       dispatch(clearUser())
       removeCookie("userToken")
+      navigate("/")
     },
     [],
   )

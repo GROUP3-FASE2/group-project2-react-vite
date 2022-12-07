@@ -19,7 +19,7 @@ const ClassList = () => {
     useEffect(() => {
         if (!cookies.userToken) {
             dispatch(clearUser())
-            navigate("/")
+            navigate("/*")
         }
     }, [cookies.userToken])
 
@@ -27,6 +27,7 @@ const ClassList = () => {
         () => {
           dispatch(clearUser())
           removeCookie("userToken")
+          navigate("/")
         },
         [],
       )

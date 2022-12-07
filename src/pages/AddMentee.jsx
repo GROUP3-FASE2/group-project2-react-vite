@@ -20,13 +20,14 @@ const AddMentee = () => {
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser())
-      navigate("/")
+      navigate("/*")
     }
   }, [cookies.userToken])
   const onLogout = useCallback(
     () => {
       dispatch(clearUser())
       removeCookie("userToken")
+      navigate("/")
     },
     [],
   )
