@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import CardDashboard from "../components/CardDashBoard";
 import axios from "axios";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
@@ -15,9 +15,16 @@ import {
   Line,
 } from "recharts";
 import { useNavigate } from "react-router-dom";
+
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from '../store/features/usersSlice'
+
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../store/features/usersSlice";
+import Swal from "sweetalert2";
+
 
 
 
@@ -50,22 +57,36 @@ const Dashboard = () => {
   }
 
 
+  const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
   useEffect(() => {
     getUser();
     if (!cookies.userToken) {
-      dispatch(clearUser())
-      navigate("/")
+      dispatch(clearUser());
+      navigate("/");
     }
-  }, [cookies.userToken])
+  }, [cookies.userToken]);
 
-  const onLogout = useCallback(
-    () => {
-      dispatch(clearUser())
-      removeCookie("userToken")
-    },
-    [],
-  )
-
+  const onLogout = useCallback(() => {
+    Swal.fire({
+      title: "Are you sure?",
+      // text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(clearUser());
+        removeCookie("userToken");
+      }
+    });
+  }, []);
 
   const data = [
     { name: "Aprli", Register: 1000, Placement: 2000, Graduates: 1000 },
@@ -79,11 +100,16 @@ const Dashboard = () => {
   return (
     <Container>
       <Sidebar />
+
       <div className="flex flex-col w-full">
         <Navbar
           onLogout={onLogout}
           userName={currentUsers.full_name}
         />
+
+      <div className="flex flex-col w-full m-5">
+        <Navbar onLogout={onLogout} namePages={"Dashboard"} />
+
         {/* START CONTENT HERE */}
 
         <div>
@@ -112,9 +138,21 @@ const Dashboard = () => {
                 <Tooltip />
                 <Legend />
                 <CartesianGrid strokeDasharray="5 5" />
-                <Line dataKey="Register" fill="#8884d8" background={{ fill: "#eee" }} />
-                <Line dataKey="Placement" fill="#8884d8" background={{ fill: "#eee" }} />
-                <Line dataKey="Graduates" fill="#8884d8" background={{ fill: "#eee" }} />
+                <Line
+                  dataKey="Register"
+                  fill="#8884d8"
+                  background={{ fill: "#eee" }}
+                />
+                <Line
+                  dataKey="Placement"
+                  fill="#8884d8"
+                  background={{ fill: "#eee" }}
+                />
+                <Line
+                  dataKey="Graduates"
+                  fill="#8884d8"
+                  background={{ fill: "#eee" }}
+                />
               </LineChart>
             </div>
           </div>

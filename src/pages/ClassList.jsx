@@ -23,11 +23,22 @@ const ClassList = () => {
         }
     }, [cookies.userToken])
 
+    const onLogout = useCallback(
+        () => {
+          dispatch(clearUser())
+          removeCookie("userToken")
+        },
+        [],
+      )
+
     return (
         <Container>
             <Sidebar />
             <div className='flex flex-col w-full h-full m-5'>
-                <Navbar />
+                <Navbar 
+                onLogout={onLogout}
+                namePages={'Class List'}
+                />
                 <GeneralSearch />
                 <div className='mt-5'>
                     <TableClassList />

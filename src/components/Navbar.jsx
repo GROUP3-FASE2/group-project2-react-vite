@@ -15,13 +15,13 @@ const Navbar = ({ namePages, onLogout, userName }) => {
             <p className="text-xl text-dark-alta/50 ">
               Hello, <span className="text-dark-alta font-bold">{userName}</span>
             </p>
-            <button className="btn" onClick={onLogout}>Log out</button>
+            <button className="btn bg-dark-alta border-none mt-2 p-2 mr-5 text-white" onClick={onLogout}>Log out</button>
           </div>
         </div>
       </div>
       <div className="mx-5">
-        <hr className="border-dark-alta border" />
-        <hr className="border-dark-alta border my-3" />
+        <hr className="border-dark-alta " />
+        <hr className="border-dark-alta my-3" />
       </div>
     </div>
   );

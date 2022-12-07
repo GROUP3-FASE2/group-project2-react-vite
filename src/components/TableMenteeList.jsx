@@ -2,7 +2,7 @@ import React from 'react'
 import { MdDeleteForever, MdBook } from 'react-icons/md'
 import { BiEditAlt } from 'react-icons/bi'
 
-const TableMenteeList = () => {
+const TableMenteeList = ({onClick}) => {
     return (
         <div className="flex flex-col">
             <div className="overflow-x-auto">
@@ -92,7 +92,7 @@ const TableMenteeList = () => {
                                             className="text-[#053260] hover:text-[#053260] flex justify-center"
                                             href="#"
                                         >
-                                            <MdBook size={20}/>
+                                            <MdBook size={20} onClick={onClick}/>
                                         </a>
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap text-center">
