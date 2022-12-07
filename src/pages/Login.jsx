@@ -4,7 +4,7 @@ import logo from '../assets/logo.png'
 import login from '../assets/bg-logo.png'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../store/features/usersSlice'
 import { useCookies } from 'react-cookie';
 
@@ -16,22 +16,23 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [cookies, setCookie] = useCookies(['userToken']);
+    const currentUser = useSelector((state) => state.users.currentUser);
+    console.log("this:", currentUser)
 
     const authLogin = async (e) => {
         e.preventDefault()
-        await axios.post(`http://35.194.55.171:8000/auth`, {
+        await axios.post(`http://34.136.159.229:8000/auth`, {
             email: email,
             password: password
         })
             .then((response) => {
                 const { data } = response.data
+                console.log("tet", data)
                 if (data) {
                     setCookie('userToken', data.token, { path: '/' });
                     dispatch(updateUser(data))
-                    navigate("/dashboard")
                 }
             })
-
             .catch((error) => {
                 console.log("err msg :", error)
                 setMsg(error)
@@ -41,9 +42,6 @@ const Login = () => {
     useEffect(() => {
         if (cookies.userToken) {
             navigate("/dashboard")
-        }
-        return () => {
-
         }
     }, [cookies.userToken])
 
@@ -63,14 +61,6 @@ const Login = () => {
                 </div>
             </div>
             <div className='flex flex-col w-full h-screen bg-dark-alta'>
-                {/* <div>
-                    <form>
-                        <div>
-                            <label>Email</label>
-                            <input />
-                        </div>
-                    </form>
-                </div> */}
                 <div className='flex h-screen justify-center items-center'>
                     <div className='flex flex-col justify-center w-[400px]'>
                         <form className='w-full mx-auto rounded-lg bg-white p-8 px-8 h-[500px]' onSubmit={authLogin}>
