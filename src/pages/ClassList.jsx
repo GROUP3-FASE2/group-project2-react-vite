@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import GeneralSearch from "../components/GeneralSearch";
+import GeneralSearchClass from "../components/GeneralSearchClass";
 import ButtonNxtPrv from "../components/ButtonNxtPrv";
 import TableClassList from "../components/TableClassList";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const ClassList = () => {
           text: "Logout successfully",
           showConfirmButton: false,
           timer: 1500,
-      });
+        });
         dispatch(clearUser());
         removeCookie("userToken");
         navigate("/");
@@ -76,7 +76,7 @@ const ClassList = () => {
           namePages={"Class List"}
           userName={currentUsers.full_name}
         />
-        <GeneralSearch />
+        <GeneralSearchClass />
         <div className="mt-5">
           <TableClassList id={data[0]?.id} classes={data[0]?.name} />
         </div>
