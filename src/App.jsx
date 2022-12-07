@@ -12,6 +12,7 @@ import MenteeLog from "./pages/MenteeLog";
 import ClassList from "./pages/ClassList";
 import MenteeList from "./pages/MenteeList";
 import PageNotFound from "./pages/PageNotFound";
+import PageMustLogin from "./pages/PageMustLogin";
 import store from "./store/store";
 
 let persistor = persistStore(store);
@@ -30,6 +31,7 @@ function App() {
               <Route path="/menteelist" element={<MenteeList />} />
               <Route path="/menteelog" element={<MenteeLog />} />
               <Route path="/addmentee" element={<Addmentee />} />
+              <Route path="/badpage" element={<PageMustLogin />} />
               <Route path="/*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>

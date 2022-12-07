@@ -6,38 +6,59 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from '../store/features/usersSlice'
+import Swal from "sweetalert2";
 
 const MenteeLog = () => {
 
   const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const currentUsers = useSelector((state) => state.users.currentUser);
 
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser())
-      navigate("/*")
+      navigate("/badpage")
     }
   }, [cookies.userToken])
 
   const onLogout = useCallback(
     () => {
-      dispatch(clearUser())
-      removeCookie("userToken")
-      navigate("/")
-    },
-    [],
-  )
+      Swal.fire({
+        title: "Are you sure want to logout?",
+        // text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Yes",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            text: "Logout successfully",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+          dispatch(clearUser());
+          removeCookie("userToken");
+          navigate("/");
+        }
+      });
+    }, []);
 
   return (
     <Container>
       <Sidebar />
       <div className="flex flex-col w-full h-full m-5 ">
-        <Navbar 
-        onLogout={onLogout}
-        namePages={"Mentee Log"} />
+        <Navbar
+          onLogout={onLogout}
+          namePages={"Mentee Log"}
+          userName={currentUsers.full_name} />
         <div className="flex p-5 justify-between">
           <div>
             <p className="text-2xl">
@@ -64,7 +85,7 @@ const MenteeLog = () => {
           </div>
         </div>
         <div className="pt-12 text-right">
-        <div className="bg-orange-alta w-30 border-none text-white btn mr-2" onClick={() => navigate('/menteelist')}>Back</div>
+          <div className="bg-orange-alta w-30 border-none text-white btn mr-2" onClick={() => navigate('/menteelist')}>Back</div>
           <ButtonNewLog />
         </div>
         <div className="flex flex-col gap-5 pt-5">
