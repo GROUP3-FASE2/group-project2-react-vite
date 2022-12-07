@@ -31,35 +31,35 @@ const Sidebar = () => {
             <hr />
             <Link to={"/dashboard"}>
               <li className="flex justify-start">
-                <a className="">
+                <p className="">
                   <AiFillHome className="text-2xl " />
                   Dashboard
-                </a>
+                </p>
               </li>
             </Link>
             <Link to={"/menteelist"}>
               <li>
-                <a>
+                <p>
                   <FaUserAlt className="text-2xl" />
                   Mentee
-                </a>
+                </p>
               </li>
             </Link>
             <hr />
             <Link to={"/userlist"}>
               <li>
-                <a>
+                <p>
                   <FaUsers className="text-2xl" />
                   Users
-                </a>
+                </p>
               </li>
             </Link>
             <Link to={"/classlist"}>
               <li>
-                <a>
+                <p>
                   <BsDoorOpenFill className="text-2xl" />
                   Class
-                </a>
+                </p>
               </li>
             </Link>
           </ul>
