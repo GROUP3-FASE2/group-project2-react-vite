@@ -65,7 +65,7 @@ const Login = () => {
                 <div className="m-5 w-full">
                     <img src={logo} alt="" className="w-32 mx-5" />
                 </div>
-                <div className="w-3/4 mx-10 z-10">
+                <div className="w-ful mx-10 z-10 ">
                     <h1 className="mt-5 text-6xl font-bold text-white">Welcome...</h1>
                     <p className="my-5 text-white">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
@@ -73,8 +73,8 @@ const Login = () => {
                         maxime iste dicta?
                     </p>
                 </div>
-                <div className="w-full h-full absolute pt-44 ml-24">
-                    <img src={login} alt="" className="block m-auto" />
+                <div className="w-full h-full flex items-center justify-center ">
+                    <img src={login} alt="" className=""/>
                 </div>
             </div>
             <div className="flex flex-col w-full h-screen bg-dark-alta">

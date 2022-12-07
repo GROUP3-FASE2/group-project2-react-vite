@@ -28,7 +28,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser());
-      navigate("/*");
+      navigate("/badpage");
     }
   }, [cookies.userToken]);
 
@@ -44,6 +44,13 @@ const Dashboard = () => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: "Logout successfully",
+          showConfirmButton: false,
+          timer: 1500,
+      });
         dispatch(clearUser());
         removeCookie("userToken");
         navigate("/");

@@ -36,14 +36,14 @@ const ClassList = () => {
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser());
-      navigate("/");
+      navigate("/badpage");
     }
     getData();
   }, [cookies.userToken]);
 
   const onLogout = useCallback(() => {
     Swal.fire({
-      title: "Are you sure?",
+      title: "Are you sure want to logout?",
       // text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -53,8 +53,16 @@ const ClassList = () => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.isConfirmed) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: "Logout successfully",
+          showConfirmButton: false,
+          timer: 1500,
+      });
         dispatch(clearUser());
         removeCookie("userToken");
+        navigate("/");
       }
     });
   }, []);

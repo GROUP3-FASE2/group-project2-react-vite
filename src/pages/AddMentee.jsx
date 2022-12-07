@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from '../store/features/usersSlice'
+import Swal from "sweetalert2";
 
 const AddMentee = () => {
 
@@ -20,17 +21,35 @@ const AddMentee = () => {
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser())
-      navigate("/*")
+      navigate("/badpage")
     }
   }, [cookies.userToken])
   const onLogout = useCallback(
     () => {
-      dispatch(clearUser())
-      removeCookie("userToken")
-      navigate("/")
-    },
-    [],
-  )
+      Swal.fire({
+        title: "Are you sure want to logout?",
+        // text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Yes",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "No",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            text: "Logout successfully",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+          dispatch(clearUser());
+          removeCookie("userToken");
+          navigate("/");
+        }
+      });
+    }, []);
 
   return (
     <Container>
