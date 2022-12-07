@@ -9,20 +9,38 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from '../store/features/usersSlice'
+import axios from "axios";
 
 const UserList = () => {
 
+    const [listUser, setListUser] = useState('')
     const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const currentUsers = useSelector((state) => state.users.currentUser)
-    console.log("this:", currentUsers)
+
+
+
+    const getData = async () => {
+        await axios.get(`http://34.136.159.229:8000/users`, {
+            headers: { Authorization: `Bearer ${cookies.userToken}` }
+        })
+            .then((response) => {
+                setListUser(response.data.data)
+                console.log(response.data.data)
+            }
+            ).catch((error) => {
+                console.log(error)
+            })
+    }
+
 
     useEffect(() => {
         if (!cookies.userToken) {
             dispatch(clearUser())
             navigate("/")
         }
+        getData()
     }, [cookies.userToken])
 
     const onLogout = useCallback(
@@ -42,12 +60,16 @@ const UserList = () => {
                     onLogout={onLogout}
                     userName={currentUsers.full_name}
                 />
-
-                <Navbar namePages={"User List"} />
                 <GeneralSearch />
-
                 <div>
-                    <TableUserList />
+                    <TableUserList
+                        number={listUser.id}
+                        name={listUser.full_name}
+                        email={listUser.email}
+                        team={listUser.team}
+                        role={listUser.role}
+                        status={listUser.status}
+                    />
                 </div>
                 <ButtonNxtPrv />
             </div>

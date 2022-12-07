@@ -2,7 +2,7 @@ import React from 'react'
 import { MdDeleteForever } from 'react-icons/md';
 import { BiEditAlt } from 'react-icons/bi';
 
-const TableUserList = () => {
+const TableUserList = ({ number, name, role, status, team, email }) => {
     return (
         <div className="flex flex-col">
             <div className="overflow-x-auto">
@@ -64,95 +64,22 @@ const TableUserList = () => {
                             <tbody className="divide-y divide-gray-200">
                                 <tr>
                                     <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                        1
+                                        {number}
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                        Jone Doe
+                                        {name}
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                        jonne62@gmail.com
+                                        {email}
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        People
+                                        {team}
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Default
+                                        {role}
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Active
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <a
-                                            className="text-[#C12A7C] hover:text-[#C12A7C] flex justify-center"
-                                            href="#"
-                                        >
-                                            <BiEditAlt />
-                                        </a>
-                                    </td>
-
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <a
-                                            className="text-[#053260] hover:text-[#053260] flex justify-center"
-                                            href="#"
-                                        >
-                                            <MdDeleteForever />
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                        1
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                        Jone Doe
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                        jonne62@gmail.com
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Placement
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Admin
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Non-Active
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <a
-                                            className="text-[#C12A7C] hover:text-[#C12A7C] flex justify-center"
-                                            href="#"
-                                        >
-                                            <BiEditAlt />
-                                        </a>
-                                    </td>
-
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <a
-                                            className="text-[#053260] hover:text-[#053260] flex justify-center"
-                                            href="#"
-                                        >
-                                            <MdDeleteForever />
-                                        </a>
-                                    </td>
-                                </tr><tr>
-                                    <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                                        1
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                        Jone Doe
-                                    </td>
-                                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                        jonne62@gmail.com
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Academic
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Admin
-                                    </td>
-                                    <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        Active
+                                        {status}
                                     </td>
                                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                         <a

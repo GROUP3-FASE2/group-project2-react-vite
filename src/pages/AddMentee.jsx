@@ -31,14 +31,6 @@ const AddMentee = () => {
     [],
   )
 
-  const onLogout = useCallback(
-    () => {
-      dispatch(clearUser())
-      removeCookie("userToken")
-    },
-    [],
-  )
-
   return (
     <Container>
       <Sidebar />
@@ -48,11 +40,6 @@ const AddMentee = () => {
           onLogout={onLogout}
           userName={currentUsers.full_name}
         />
-
-        <Navbar 
-        onLogout={onLogout}
-        namePages={"Add New Mentee"} />
-
         {/* START CONTENT HERE */}
         <form className="text-md form-control mx-10 my-16 border-2 gap-3 text-dark-alta border-dark-alta rounded-md p-10">
           <label className="flex flex-row justify-between items-center">
@@ -160,7 +147,7 @@ const AddMentee = () => {
                 name="radio-2"
                 className="radio border border-gray-400"
               />
-              <span>NON-IT</span> 
+              <span>NON-IT</span>
             </div>
           </label>
           <label className="flex flex-row justify-between items-center">
