@@ -45,30 +45,47 @@ const UserList = () => {
     removeCookie("userToken");
   }, []);
 
-  return (
-    <Container>
-      <Sidebar />
-      <div className="flex flex-col w-full h-full m-5 ">
-        <Navbar
-          namePages={"User List"}
-          onLogout={onLogout}
-          userName={currentUsers.full_name}
-        />
-        <GeneralSearch />
-        <div>
-          <TableUserList
-            number={listUser.id}
-            name={listUser.full_name}
-            email={listUser.email}
-            team={listUser.team}
-            role={listUser.role}
-            status={listUser.status}
-          />
-        </div>
-        <ButtonNxtPrv />
-      </div>
-    </Container>
-  );
-};
+
+    useEffect(() => {
+        if (!cookies.userToken) {
+            dispatch(clearUser())
+            navigate("/*")
+        }
+        getData()
+    }, [cookies.userToken])
+
+    const onLogout = useCallback(
+        () => {
+            dispatch(clearUser())
+            removeCookie("userToken")
+            navigate("/")
+        },
+        [],
+    )
+
+    return (
+        <Container>
+            <Sidebar />
+            <div className="flex flex-col w-full h-full m-5 ">
+
+                <Navbar namePages={"User List"}
+                    onLogout={onLogout}
+                    userName={currentUsers.full_name}
+                />
+                <GeneralSearch />
+                <div>
+                    <TableUserList
+                        number={listUser.id}
+                        name={listUser.full_name}
+                        email={listUser.email}
+                        team={listUser.team}
+                        role={listUser.role}
+                        status={listUser.status}
+                    />
+                </div>
+                <ButtonNxtPrv />
+            </div>
+        </Container>
+    )
 
 export default UserList;

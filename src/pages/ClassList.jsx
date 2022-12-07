@@ -58,7 +58,7 @@ const ClassList = () => {
       }
     });
   }, []);
-
+  
   return (
     <Container>
       <Sidebar />
