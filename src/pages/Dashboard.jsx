@@ -28,7 +28,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser());
-      navigate("/");
+      navigate("/*");
     }
   }, [cookies.userToken]);
 
@@ -46,6 +46,7 @@ const Dashboard = () => {
       if (result.isConfirmed) {
         dispatch(clearUser());
         removeCookie("userToken");
+        navigate("/");
       }
     });
   }, []);
@@ -63,7 +64,8 @@ const Dashboard = () => {
       <div className="flex flex-col w-full m-5">
         <Navbar
           userName={currentUsers.full_name}
-          onLogout={onLogout} namePages={"Dashboard"} />
+          onLogout={onLogout} 
+          namePages={"Dashboard"} />
         {/* START CONTENT HERE */}
 
         <div>

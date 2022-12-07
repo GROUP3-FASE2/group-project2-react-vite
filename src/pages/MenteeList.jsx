@@ -21,7 +21,7 @@ const MenteeList = () => {
     useEffect(() => {
         if (!cookies.userToken) {
             dispatch(clearUser())
-            navigate("/")
+            navigate("/*")
         }
     }, [cookies.userToken])
 
@@ -29,6 +29,7 @@ const MenteeList = () => {
         () => {
           dispatch(clearUser())
           removeCookie("userToken")
+          navigate("/")
         },
         [],
       )

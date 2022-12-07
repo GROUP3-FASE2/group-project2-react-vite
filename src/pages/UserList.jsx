@@ -38,7 +38,7 @@ const UserList = () => {
     useEffect(() => {
         if (!cookies.userToken) {
             dispatch(clearUser())
-            navigate("/")
+            navigate("/*")
         }
         getData()
     }, [cookies.userToken])
@@ -47,6 +47,7 @@ const UserList = () => {
         () => {
             dispatch(clearUser())
             removeCookie("userToken")
+            navigate("/")
         },
         [],
     )
