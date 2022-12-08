@@ -14,37 +14,42 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const MenteeList = () => {
-
-  const [listMentees, setListMentees] = useState('')
+  const [listMentees, setListMentees] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("");
 
-  console.log("tet", search)
+  console.log("tet", search);
 
   const getSearch = async (e) => {
-    await axios.get(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees/${name}`, {
-      headers: {
-        Authorization: `Bearer ${cookies.userToken}`,
-        name: search
-      }
-    }
-    )
+    await axios
+      .get(
+        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees/${name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.userToken}`,
+            name: search,
+          },
+        }
+      )
       .then((response) => {
-        console.log(response)
+        console.log(response);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   const getData = async () => {
     await axios
-      .get(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees`, {
-        headers: { Authorization: `Bearer ${cookies.userToken}` },
-      })
+      .get(
+        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees`,
+        {
+          headers: { Authorization: `Bearer ${cookies.userToken}` },
+        }
+      )
       .then((response) => {
         setListMentees(response.data.data);
         console.log("aa", listMentees);
@@ -59,7 +64,7 @@ const MenteeList = () => {
       dispatch(clearUser());
       navigate("/badpage");
     }
-    getData()
+    getData();
   }, [cookies.userToken]);
 
   const onLogout = useCallback(() => {
@@ -100,7 +105,8 @@ const MenteeList = () => {
         <GeneralSearchMentee
           changeSearch={(e) => setSearch(e.target.value)}
           onSearch={() => getSearch()}
-          onclick={() => navigate("/addmentee")} />
+          onclick={() => navigate("/addmentee")}
+        />
         <MenteeFilter />
         <div className="mt-5">
           <div className="flex flex-col">
@@ -175,9 +181,12 @@ const MenteeList = () => {
                           status={item.status}
                           education={item.education_type}
                           gender={item.gender}
-                          onClick={() => navigate("/menteelog")} />
+                          onClick={() => navigate("/menteelog")}
+                        />;
                       })
-                    ) : (<div></div>)}
+                    ) : (
+                      <div></div>
+                    )}
                   </table>
                 </div>
               </div>
