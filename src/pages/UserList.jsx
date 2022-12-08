@@ -16,12 +16,33 @@ import Swal from "sweetalert2";
 import TableUserList from "../components/TableUserList";
 
 const UserList = () => {
+
+
   const [search, setSearch] = useState("");
   const [listUser, setListUser] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
+
+  const postData = async () => {
+    await axios.post(`http://34.136.159.229:8000/users/`, {
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+      "id": id,
+      "full_name": name,
+      "email": email,
+      "team": team,
+      "role": role,
+      "status": status,
+    })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   const getSearch = async (e) => {
     await axios
       .get(
@@ -34,8 +55,10 @@ const UserList = () => {
         }
       )
       .then((response) => {
+        console.log(response)
       })
       .catch((err) => {
+        console.log(err)
       });
   };
 
@@ -109,6 +132,7 @@ const UserList = () => {
           userName={currentUsers.full_name}
         />
         <GeneralSearchUser
+          addSearch
           changeSearch={(e) => setSearch(e.target.value)}
           onSearch={() => getSearch()}
         />

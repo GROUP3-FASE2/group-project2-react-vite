@@ -1,6 +1,12 @@
 import React from "react";
 
-const ModalAddUser = () => {
+const ModalAddUser = ({
+  addPassword,
+  addName,
+  addEmail,
+  addTeam,
+  addStatus,
+  submit }) => {
   return (
     <div className="pt-2 pr-4">
       <label htmlFor="my-modal-4" className="btn bg-dark-alta">
@@ -19,6 +25,18 @@ const ModalAddUser = () => {
                 Name
               </label>
               <input
+                onChange={addName}
+                type="text"
+                placeholder="Rachman Kamil"
+                className="input input-bordered max-w-2xl w-full bg-white border border-gray-400"
+              />
+            </div>
+            <div className="flex flex-col text-lg pt-2">
+              <label htmlFor="" className="pb-1">
+                Password
+              </label>
+              <input
+                onChange={addPassword}
                 type="text"
                 placeholder="Rachman Kamil"
                 className="input input-bordered max-w-2xl w-full bg-white border border-gray-400"
@@ -29,6 +47,7 @@ const ModalAddUser = () => {
                 Email
               </label>
               <input
+                onChange={addEmail}
                 type="text"
                 placeholder="user@gmail.com"
                 className="input input-bordered max-w-2xl w-full bg-white border border-gray-400"
@@ -38,7 +57,9 @@ const ModalAddUser = () => {
               <label htmlFor="" className="mb-1">
                 Team
               </label>
-              <select className="select select-bordered ">
+              <select
+                onChange={addTeam}
+                className="select select-bordered ">
                 <option selected>Academic</option>
                 <option>Super Admin</option>
               </select>
@@ -48,7 +69,8 @@ const ModalAddUser = () => {
                   <label htmlFor="" className="mb-1">
                     Role
                   </label>
-                  <select className="select select-bordered ">
+                  <select
+                    className="select select-bordered ">
                     <option selected>User</option>
                     <option>Super Admin</option>
                   </select>
@@ -57,7 +79,9 @@ const ModalAddUser = () => {
                   <label htmlFor="" className="mb-1">
                     Status
                   </label>
-                  <select className="select select-bordered ">
+                  <select
+                    onChange={addStatus}
+                    className="select select-bordered ">
                     <option selected>Active</option>
                     <option>Non-Active</option>
                   </select>
@@ -69,7 +93,9 @@ const ModalAddUser = () => {
               <label htmlFor="my-modal-4" className="btn w-1/6 bg-orange-alta">
                 CANCEL
               </label>
-              <label htmlFor="" className="btn w-1/6 bg-dark-alta">
+              <label
+                onClick={submit}
+                htmlFor="" className="btn w-1/6 bg-dark-alta">
                 SAVE
               </label>
             </div>
