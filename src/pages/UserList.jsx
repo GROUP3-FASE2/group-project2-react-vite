@@ -16,46 +16,49 @@ import Swal from "sweetalert2";
 import TableUserList from "../components/TableUserList";
 
 const UserList = () => {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("");
   const [listUser, setListUser] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
 
-  console.log("tet", search)
+  console.log("tet", search);
 
   const getSearch = async (e) => {
-    await axios.get(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees/${name}`, {
-      headers: {
-        Authorization: `Bearer ${cookies.userToken}`,
-        name: search
-      }
-    }
-    )
+    await axios
+      .get(
+        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees/${name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.userToken}`,
+            name: search,
+          },
+        }
+      )
       .then((response) => {
-        console.log(response)
+        console.log(response);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   const onDelete = async (id) => {
-    await axios.delete(`http://34.136.159.229:8000/users/${id}`, {
-      headers: { Authorization: `Bearer ${cookies.userToken}` },
-      method: `DELETE`,
-      data: { id: listUser.id }
-    })
+    await axios
+      .delete(`http://34.136.159.229:8000/users/${id}`, {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+        method: `DELETE`,
+        data: { id: listUser.id },
+      })
       .then((response) => {
-        console.log(response)
-        getData()
+        console.log(response);
+        getData();
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
-
+        console.log(error);
+      });
+  };
 
   const getData = async () => {
     await axios
@@ -180,7 +183,6 @@ const UserList = () => {
                       {listUser ? (
                         listUser.map((item) => {
                           return (
-
                             <TableUserList
                               number={item.id}
                               name={item.full_name}
@@ -190,10 +192,11 @@ const UserList = () => {
                               email={item.email}
                               onDelete={() => onDelete(item.id)}
                             />
-                          )
+                          );
                         })
-                      ) : <div></div>
-                      }
+                      ) : (
+                        <div></div>
+                      )}
                     </div>
                   ) : (
                     <div>
@@ -249,10 +252,11 @@ const UserList = () => {
                               email={item.email}
                               hidden="hidden"
                             />
-                          )
+                          );
                         })
-                      ) : <div></div>
-                      }
+                      ) : (
+                        <div></div>
+                      )}
                     </div>
                   )}
                 </table>

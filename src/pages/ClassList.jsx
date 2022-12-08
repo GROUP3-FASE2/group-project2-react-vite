@@ -21,16 +21,13 @@ const ClassList = () => {
 
   const onDelete = async (id) => {
     await axios
-      .delete(
-        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes/${id}`,
-        {
-          headers: { Authorization: `Bearer ${cookies.userToken}` },
-          method: `DELETE`,
-          data: { id: data.id },
-        }
-      )
+      .delete(`http://34.136.159.229:8000/classes/${id}`, {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+        method: `DELETE`,
+        data: { id: data.id },
+      })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         getData();
       })
       .catch((error) => {
@@ -40,12 +37,9 @@ const ClassList = () => {
 
   const getData = async () => {
     await axios
-      .get(
-        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes`,
-        {
-          headers: { Authorization: `Bearer ${cookies.userToken}` },
-        }
-      )
+      .get(`http://34.136.159.229:8000/classes`, {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+      })
       .then((response) => {
         console.log(response.data.data);
         setDatas(response.data.data);
@@ -134,21 +128,13 @@ const ClassList = () => {
                       </tr>
                     </thead>
 
-                    {data ? (data.map((item) => {
-                      return (
-                        <TableClassList
-                          id={item.id}
-                          classes={item.name}
-                          onDelete={() => onDelete(item.id)}
-                        />
-                      )
-                    })) : <></>}
                     {data ? (
                       data.map((item) => {
                         return (
                           <TableClassList
+                            key={item.id}
                             id={item.id}
-                            classes={item.name}
+                            classes={item.class_name}
                             onDelete={() => onDelete(item.id)}
                           />
                         );
