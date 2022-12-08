@@ -20,25 +20,32 @@ const ClassList = () => {
   const currentUsers = useSelector((state) => state.users.currentUser);
 
   const onDelete = async (id) => {
-    await axios.delete(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes/${id}`, {
-      headers: { Authorization: `Bearer ${cookies.userToken}` },
-      method: `DELETE`,
-      data: { id: data.id }
-    })
+    await axios
+      .delete(
+        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes/${id}`,
+        {
+          headers: { Authorization: `Bearer ${cookies.userToken}` },
+          method: `DELETE`,
+          data: { id: data.id },
+        }
+      )
       .then((response) => {
-        console.log(response)
-        getData()
+        console.log(response);
+        getData();
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   const getData = async () => {
     await axios
-      .get(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes`, {
-        headers: { Authorization: `Bearer ${cookies.userToken}` },
-      })
+      .get(
+        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes`,
+        {
+          headers: { Authorization: `Bearer ${cookies.userToken}` },
+        }
+      )
       .then((response) => {
         console.log(response.data.data);
         setDatas(response.data.data);
@@ -136,6 +143,19 @@ const ClassList = () => {
                         />
                       )
                     })) : <></>}
+                    {data ? (
+                      data.map((item) => {
+                        return (
+                          <TableClassList
+                            id={item.id}
+                            classes={item.name}
+                            onDelete={() => onDelete(item.id)}
+                          />
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
                   </table>
                 </div>
               </div>
