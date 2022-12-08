@@ -19,6 +19,22 @@ const ClassList = () => {
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
 
+
+  const onDelete = async (id) => {
+    await axios.delete(`http://34.136.159.229:8000/classes/${id}`, {
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+      method: `DELETE`,
+      data: { id: data.id }
+    })
+      .then((response) => {
+        console.log(response)
+        getData()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   const getData = async () => {
     await axios
       .get(`http://34.136.159.229:8000/classes`, {
@@ -78,7 +94,54 @@ const ClassList = () => {
         />
         <GeneralSearchClass />
         <div className="mt-5">
-          <TableClassList id={data[0]?.id} classes={data[0]?.name} />
+          <div className="flex flex-col">
+            <div className="overflow-x-auto">
+              <div className="p-1.5 w-full inline-block align-middle">
+                <div className="overflow-hidden border rounded-lg">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase w-[50px]"
+                        >
+                          No
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase w-3/4"
+                        >
+                          Class Name
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                        >
+                          Edit
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                        >
+                          Delete
+                        </th>
+                      </tr>
+                    </thead>
+
+                    {data.map((item) => {
+                      return (
+                        <TableClassList
+                          id={item.id}
+                          classes={item.class_name}
+                          onDelete={() => onDelete(item.id)}
+                        />
+                      )
+                    })}
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <ButtonNxtPrv />
       </div>

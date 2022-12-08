@@ -13,6 +13,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
 import axios from "axios";
 import Swal from "sweetalert2";
+import TableUserList from "../components/TableUserList";
 
 const UserList = () => {
   const [listUser, setListUser] = useState("");
@@ -20,6 +21,22 @@ const UserList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
+
+  const onDelete = async (id) => {
+    await axios.delete(`http://34.136.159.229:8000/users/${id}`, {
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+      method: `DELETE`,
+      data: { id: listUser.id }
+    })
+      .then((response) => {
+        console.log(response)
+        getData()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
 
   const getData = async () => {
     await axios
@@ -79,7 +96,149 @@ const UserList = () => {
           userName={currentUsers.full_name}
         />
         <GeneralSearchUser />
-        <div className="flex flex-col mt-5">
+        <div className="flex flex-col">
+          <div className="overflow-x-auto">
+            <div className="p-1.5 w-full inline-block align-middle">
+              <div className="overflow-hidden border rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                  {currentUsers.role === "Super Admin" ? (
+                    <div>
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          >
+                            ID
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          >
+                            Name
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          >
+                            Email
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Team
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Role
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Status
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Edit
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Delete
+                          </th>
+                        </tr>
+                      </thead>
+                      {listUser ? (
+                        listUser.map((item) => {
+                          return (
+
+                            <TableUserList
+                              number={item.id}
+                              name={item.full_name}
+                              role={item.role}
+                              status={item.status}
+                              team={item.team}
+                              email={item.email}
+                              onDelete={() => onDelete(item.id)}
+                            />
+                          )
+                        })
+                      ) : <div></div>
+                      }
+                    </div>
+                  ) : (
+                    <div>
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          >
+                            ID
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          >
+                            Name
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                          >
+                            Email
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Team
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Role
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                          >
+                            Status
+                          </th>
+                        </tr>
+                      </thead>
+                      {listUser ? (
+                        listUser.map((item) => {
+                          return (
+                            <TableUserList
+                              number={item.id}
+                              name={item.full_name}
+                              role={item.role}
+                              status={item.status}
+                              team={item.team}
+                              email={item.email}
+                              hidden="hidden"
+                            />
+                          )
+                        })
+                      ) : <div></div>
+                      }
+                    </div>
+                  )}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div className="flex flex-col mt-5">
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle">
               <div className="overflow-hidden border rounded-lg">
@@ -169,12 +328,13 @@ const UserList = () => {
                             </td>
 
                             <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                              <a
+                              <button
+                                onClick={() => onDelete(item.id)}
                                 className="text-[#053260] hover:text-[#053260] flex justify-center"
                                 href="#"
                               >
                                 <MdDeleteForever />
-                              </a>
+                              </button>
                             </td>
                           </tr>
                         );
@@ -187,7 +347,7 @@ const UserList = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* {
                     listUser ? (
                         listUser.map((item) => {
