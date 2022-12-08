@@ -22,9 +22,6 @@ const UserList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
-
-  console.log("tet", search);
-
   const getSearch = async (e) => {
     await axios
       .get(
@@ -37,10 +34,8 @@ const UserList = () => {
         }
       )
       .then((response) => {
-        console.log(response);
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -52,11 +47,9 @@ const UserList = () => {
         data: { id: listUser.id },
       })
       .then((response) => {
-        console.log(response);
         getData();
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -67,10 +60,8 @@ const UserList = () => {
       })
       .then((response) => {
         setListUser(response.data.data);
-        console.log(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 

@@ -20,7 +20,6 @@ const MenteeList = () => {
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
   const [search, setSearch] = useState("");
-  console.log(listMentees);
 
   const getData = async () => {
     await axios
@@ -31,7 +30,6 @@ const MenteeList = () => {
         setListMentees(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -42,6 +40,20 @@ const MenteeList = () => {
       },
     });
   };
+
+  const onDelete = async (id) => {
+    await axios
+      .delete(`http://34.136.159.229:8000/mentees/${id}`, {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+        method: `DELETE`,
+        data: { id: listMentees.id },
+      })
+      .then((response) => {
+        getData()
+      })
+      .catch((error) => {
+      })
+  }
 
   useEffect(() => {
     if (!cookies.userToken) {
@@ -98,78 +110,153 @@ const MenteeList = () => {
               <div className="p-1.5 w-full inline-block align-middle">
                 <div className="overflow-hidden border rounded-lg">
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          No
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Class
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Status
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Education
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Gender
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Detail
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Edit
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
-                        >
-                          Delete
-                        </th>
-                      </tr>
-                    </thead>
-                    {listMentees?.map((item) => {
-                      return (
-                        <TableMenteeList
-                          key={item.id}
-                          id={item.id}
-                          name={item.name}
-                          class_name={item.class_name}
-                          status={item.status}
-                          education={item.education_type}
-                          gender={item.gender}
-                          onClick={() => getDetail(item.id)}
-                        />
-                      );
-                    })}
+                    {currentUsers.role === "Super Admin" ? (
+                      <div>
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              No
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Name
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Class
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Status
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Education
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Gender
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Detail
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Edit
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Delete
+                            </th>
+                          </tr>
+                        </thead>
+                        {listMentees?.map((item) => {
+                          return (
+                            <TableMenteeList
+                              key={item.id}
+                              id={item.id}
+                              name={item.name}
+                              class_name={item.class_name}
+                              status={item.status}
+                              education={item.education_type}
+                              gender={item.gender}
+                              onClick={() => getDetail(item.id)}
+                              onDelete={() => onDelete(item.id)}
+                            />
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div>
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              No
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Name
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Class
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Status
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Education
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Gender
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Detail
+                            </th>
+                            <th
+                              scope="col"
+                              className="px-6 py-3 text-xs font-bold text-center text-gray-500 uppercase "
+                            >
+                              Edit
+                            </th>
+                          </tr>
+                        </thead>
+                        {listMentees?.map((item) => {
+                          return (
+                            <TableMenteeList
+                              key={item.id}
+                              id={item.id}
+                              name={item.name}
+                              class_name={item.class_name}
+                              status={item.status}
+                              education={item.education_type}
+                              gender={item.gender}
+                              onClick={() => getDetail(item.id)}
+                              hidden={"hidden"}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
                   </table>
                 </div>
               </div>

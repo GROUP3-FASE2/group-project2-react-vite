@@ -10,6 +10,8 @@ const TableMenteeList = ({
   status,
   education,
   gender,
+  onDelete,
+  hidden
 }) => {
   return (
     <tbody className="divide-y divide-gray-200">
@@ -51,7 +53,8 @@ const TableMenteeList = ({
 
         <td className="px-6 py-4 text-sm font-medium  whitespace-nowrap text-center">
           <a
-            className="text-[#053260] hover:text-[#053260] flex justify-center"
+          onClick={onDelete}
+            className={`text-[#053260] hover:text-[#053260] flex justify-center ${hidden}`}
             href="#"
           >
             <MdDeleteForever size={20} />
