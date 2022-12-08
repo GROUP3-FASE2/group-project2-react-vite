@@ -16,7 +16,6 @@ const AddMentee = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const currentUsers = useSelector((state) => state.users.currentUser)
-  console.log("this:", currentUsers)
 
   useEffect(() => {
     if (!cookies.userToken) {

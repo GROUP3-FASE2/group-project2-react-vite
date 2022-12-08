@@ -20,8 +20,6 @@ const MenteeLog = () => {
   const currentUsers = useSelector((state) => state.users.currentUser);
   const location = useLocation();
   const id = location?.state?.id;
-  console.log(id);
-  console.log(detail);
   const urlGetDetail = `http://34.136.159.229:8000/mentees/${id}`;
 
   const getDetail = async () => {
@@ -33,7 +31,6 @@ const MenteeLog = () => {
         setDetail(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -46,7 +43,6 @@ const MenteeLog = () => {
         setLogs(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 

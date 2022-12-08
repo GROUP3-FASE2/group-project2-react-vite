@@ -27,11 +27,9 @@ const ClassList = () => {
         data: { id: data.id },
       })
       .then((response) => {
-        // console.log(response);
         getData();
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -41,11 +39,9 @@ const ClassList = () => {
         headers: { Authorization: `Bearer ${cookies.userToken}` },
       })
       .then((response) => {
-        console.log(response.data.data);
         setDatas(response.data.data);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
