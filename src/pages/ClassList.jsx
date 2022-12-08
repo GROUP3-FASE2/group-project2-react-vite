@@ -30,7 +30,6 @@ const ClassList = () => {
         getData(response);
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 
