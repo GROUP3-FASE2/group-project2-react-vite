@@ -16,11 +16,30 @@ import Swal from "sweetalert2";
 import TableUserList from "../components/TableUserList";
 
 const UserList = () => {
+  const [search, setSearch] = useState('')
   const [listUser, setListUser] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
+
+  console.log("tet", search)
+
+  const getSearch = async (e) => {
+    await axios.get(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees/${name}`, {
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+        name: search
+      }
+    }
+    )
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   const onDelete = async (id) => {
     await axios.delete(`http://34.136.159.229:8000/users/${id}`, {
@@ -95,7 +114,10 @@ const UserList = () => {
           onLogout={onLogout}
           userName={currentUsers.full_name}
         />
-        <GeneralSearchUser />
+        <GeneralSearchUser
+          changeSearch={(e) => setSearch(e.target.value)}
+          onSearch={() => getSearch()}
+        />
         <div className="flex flex-col">
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle">

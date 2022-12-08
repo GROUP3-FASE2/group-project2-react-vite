@@ -19,9 +19,8 @@ const ClassList = () => {
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
 
-
   const onDelete = async (id) => {
-    await axios.delete(`http://34.136.159.229:8000/classes/${id}`, {
+    await axios.delete(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes/${id}`, {
       headers: { Authorization: `Bearer ${cookies.userToken}` },
       method: `DELETE`,
       data: { id: data.id }
@@ -37,7 +36,7 @@ const ClassList = () => {
 
   const getData = async () => {
     await axios
-      .get(`http://34.136.159.229:8000/classes`, {
+      .get(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/classes`, {
         headers: { Authorization: `Bearer ${cookies.userToken}` },
       })
       .then((response) => {
@@ -128,7 +127,7 @@ const ClassList = () => {
                       </tr>
                     </thead>
 
-                    {data.map((item) => {
+                    {data ? (data.map((item) => {
                       return (
                         <TableClassList
                           id={item.id}
@@ -136,7 +135,7 @@ const ClassList = () => {
                           onDelete={() => onDelete(item.id)}
                         />
                       )
-                    })}
+                    })) : <></>}
                   </table>
                 </div>
               </div>
