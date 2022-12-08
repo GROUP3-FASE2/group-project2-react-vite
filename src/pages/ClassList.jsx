@@ -27,9 +27,10 @@ const ClassList = () => {
         data: { id: data.id },
       })
       .then((response) => {
-        getData();
+        getData(response);
       })
       .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -41,8 +42,7 @@ const ClassList = () => {
       .then((response) => {
         setDatas(response.data.data);
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {
