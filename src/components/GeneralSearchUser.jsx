@@ -24,18 +24,10 @@ const GeneralSearchUser = ({ onSearch, changeSearch, addSearch }) => {
       status: status,
     })
       .then((response) => {
-        console.log(response)
       })
       .catch((error) => {
-        console.log(error)
       })
   }
-
-  console.log("tot", name)
-  console.log("tut", email)
-  console.log("tit", team)
-  console.log("tewt", status)
-
 
   return (
     <div className="flex justify-end">

@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const GeneralSearch = () => {
   const currentUsers = useSelector((state) => state.users.currentUser);
   const [cookies] = useCookies(["userToken"]);
   const [input, setInput] = useState("");
+  const navigate = useNavigate()
 
   const dataAdd = {
     class_name: input,
@@ -21,9 +23,9 @@ const GeneralSearch = () => {
       })
       .then((res) => {
         console.log(res.data);
+        navigate(0)
       })
       .catch((err) => {
-        console.log(err);
       });
   };
   return (
@@ -67,7 +69,6 @@ const GeneralSearch = () => {
                   CANCEL
                 </label>
                 <button
-                  onSubmit={addClass}
                   type="submit"
                   className="btn w-1/6 bg-dark-alta"
                 >

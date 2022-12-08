@@ -47,7 +47,6 @@ const Login = () => {
                     title: "Email or Password incorrect",
                     showConfirmButton: true,
                 });
-                console.log("err msg :", error);
                 // setMsg(error);
             });
     };

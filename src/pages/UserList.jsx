@@ -36,10 +36,8 @@ const UserList = () => {
       "status": status,
     })
       .then((response) => {
-        console.log(response)
       })
       .catch((error) => {
-        console.log(error)
       })
   }
 
@@ -55,10 +53,8 @@ const UserList = () => {
         }
       )
       .then((response) => {
-        console.log(response)
       })
       .catch((err) => {
-        console.log(err)
       });
   };
 
