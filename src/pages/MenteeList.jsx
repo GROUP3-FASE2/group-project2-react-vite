@@ -14,49 +14,33 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const MenteeList = () => {
-  const [listMentees, setListMentees] = useState("");
+  const [listMentees, setListMentees] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
   const [search, setSearch] = useState("");
-
-  console.log("tet", search);
-
-  const getSearch = async (e) => {
-    await axios
-      .get(
-        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees/${name}`,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.userToken}`,
-            name: search,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  console.log(listMentees);
 
   const getData = async () => {
     await axios
-      .get(
-        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees`,
-        {
-          headers: { Authorization: `Bearer ${cookies.userToken}` },
-        }
-      )
+      .get(`http://34.136.159.229:8000/mentees`, {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+      })
       .then((response) => {
         setListMentees(response.data.data);
-        console.log("aa", listMentees);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const getDetail = (id) => {
+    navigate("/menteelog", {
+      state: {
+        id: id,
+      },
+    });
   };
 
   useEffect(() => {
@@ -172,21 +156,20 @@ const MenteeList = () => {
                         </th>
                       </tr>
                     </thead>
-                    {listMentees ? (
-                      listMentees.map((item) => {
+                    {listMentees?.map((item) => {
+                      return (
                         <TableMenteeList
+                          key={item.id}
                           id={item.id}
                           name={item.name}
                           class_name={item.class_name}
                           status={item.status}
                           education={item.education_type}
                           gender={item.gender}
-                          onClick={() => navigate("/menteelog")}
-                        />;
-                      })
-                    ) : (
-                      <div></div>
-                    )}
+                          onClick={() => getDetail(item.id)}
+                        />
+                      );
+                    })}
                   </table>
                 </div>
               </div>
