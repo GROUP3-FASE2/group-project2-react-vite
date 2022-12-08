@@ -131,7 +131,7 @@ const ClassList = () => {
                       return (
                         <TableClassList
                           id={item.id}
-                          classes={item.class_name}
+                          classes={item.name}
                           onDelete={() => onDelete(item.id)}
                         />
                       )
