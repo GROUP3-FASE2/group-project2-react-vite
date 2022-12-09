@@ -11,11 +11,37 @@ import { clearUser } from '../store/features/usersSlice'
 import Swal from "sweetalert2";
 
 const AddMentee = () => {
-
+  const [name, setName] = useState('')
+  const [status, setStatus] = useState('')
+  const [education, setEducation] = useState('')
+  const [gender, setGender] = useState('')
+  const [id, setId] = useState()
   const [cookies, setCookie, removeCookie] = useCookies(['userToken']);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const currentUsers = useSelector((state) => state.users.currentUser)
+
+  const dataAdd = {
+    name: name,
+    status: status,
+    gender: gender,
+    education_type: education,
+    class_id: id
+  };
+
+  const addLog = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(`http://34.136.159.229:8000/classes`, dataAdd, {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+      })
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     if (!cookies.userToken) {
@@ -42,7 +68,7 @@ const AddMentee = () => {
             text: "Logout successfully",
             showConfirmButton: false,
             timer: 1500,
-        });
+          });
           dispatch(clearUser());
           removeCookie("userToken");
           navigate("/");
@@ -64,6 +90,7 @@ const AddMentee = () => {
           <label className="flex flex-row justify-between items-center">
             <span>Name</span>
             <input
+              onChange={(e) => setName(e.target.value)}
               type="text"
               placeholder="Name"
               className="input input-bordered max-w-2xl w-full bg-white border border-gray-400"
@@ -97,6 +124,7 @@ const AddMentee = () => {
             <span>Gender</span>
             <div className="pl-32 items-center flex gap-3">
               <input
+                onChange={(e) => setGender(e.target.value)}
                 type="radio"
                 name="radio-1"
                 className="radio border border-gray-400 checked:bg-dark-alta"
@@ -145,10 +173,12 @@ const AddMentee = () => {
           </label>
           <label className="flex flex-row justify-between items-center">
             <span>Status</span>
-            <select className="select select-bordered w-full max-w-2xl bg-white border border-gray-400">
-              <option selected>Saudara Kandung</option>
-              <option>Orang Tua</option>
-              <option>Paman</option>
+            <select
+              onChange={(e) => setStatus(e.target.value)}
+              className="select select-bordered w-full max-w-2xl bg-white border border-gray-400">
+              <option selected>Active</option>
+              <option>Interview</option>
+              <option>Join Class</option>
             </select>
           </label>
           <span className="font-bold text-lg">Education Data</span>
@@ -156,6 +186,7 @@ const AddMentee = () => {
             <span>Type</span>
             <div className="pl-32 items-center flex gap-3">
               <input
+                onChange={(e) => setEducation(e.target.value)}
                 type="radio"
                 name="radio-2"
                 className="radio border border-gray-400"

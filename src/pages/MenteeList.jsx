@@ -27,6 +27,7 @@ const MenteeList = () => {
         headers: { Authorization: `Bearer ${cookies.userToken}` },
       })
       .then((response) => {
+        console.log(response.data.data)
         setListMentees(response.data.data);
       })
       .catch((error) => {

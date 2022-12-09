@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import ModalAddUser from "./ModalAddUser";
 
 const GeneralSearchUser = ({ onSearch, changeSearch, addSearch }) => {
@@ -12,22 +13,45 @@ const GeneralSearchUser = ({ onSearch, changeSearch, addSearch }) => {
   const [role, setRole] = useState("")
   const [status, setSatus] = useState("")
   const [cookies, setCookie, removeCookie] = useCookies(["userToken"]);
+  const navigate = useNavigate()
+
+
+  const dataAdd = {
+    full_name: name,
+    password: password,
+    email: email,
+    team: team,
+    status: status,
+  };
 
   const postData = async (e) => {
     e.preventDefault()
-    await axios.post(`https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/users`, {
-      headers: { Authorization: `Bearer ${cookies.userToken}` },
-      full_name: name,
-      password: password,
-      email: email,
-      team: team,
-      status: status,
-    })
+    await axios
+      .post(`http://34.136.159.229:8000/users`, dataAdd, {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+      })
       .then((response) => {
+        console.log(response)
+        navigate(0)
       })
       .catch((error) => {
+        console.log(error)
       })
   }
+
+  // const postData = async (e) => {
+  //   e.preventDefault()
+  //   await axios
+  //     .post(`http://34.136.159.229:8000/users`, dataAdd, {
+  //       headers: { Authorization: `Bearer ${cookies.userToken}` },
+  //     })
+  //     .then((response) => {
+  //       console.log(response)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }
 
   return (
     <div className="flex justify-end">

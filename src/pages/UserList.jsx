@@ -25,26 +25,10 @@ const UserList = () => {
   const dispatch = useDispatch();
   const currentUsers = useSelector((state) => state.users.currentUser);
 
-  const postData = async () => {
-    await axios.post(`http://34.136.159.229:8000/users/`, {
-      headers: { Authorization: `Bearer ${cookies.userToken}` },
-      "id": id,
-      "full_name": name,
-      "email": email,
-      "team": team,
-      "role": role,
-      "status": status,
-    })
-      .then((response) => {
-      })
-      .catch((error) => {
-      })
-  }
-
   const getSearch = async (e) => {
     await axios
       .get(
-        `https://virtserver.swaggerhub.com/YUSNARSETIYADI150403/OPEN-API-DASHBOARD/1.0.0/mentees/${name}`,
+        `http://34.136.159.229:8000/users/?name=${name}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.userToken}`,
@@ -53,8 +37,10 @@ const UserList = () => {
         }
       )
       .then((response) => {
+        console.log(response)
       })
       .catch((err) => {
+        console.log(err)
       });
   };
 
@@ -75,21 +61,25 @@ const UserList = () => {
   const getData = async () => {
     await axios
       .get(`http://34.136.159.229:8000/users`, {
-        headers: { Authorization: `Bearer ${cookies.userToken}` },
+        headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzA2MzQzNjIsInJvbGUiOiJTdXBlciBBZG1pbiIsInVzZXJJZCI6MTAwfQ.GSabKY2VneamVnRh7zAapw-_BhFnpBIc6gZQ--3x63w` },
       })
       .then((response) => {
-        setListUser(response.data.data);
+        setListUser(response.data.data)
       })
       .catch((error) => {
       });
   };
+
+  // .get(`http://34.136.159.229:8000/users`, {
+  //   headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzA2MzQzNjIsInJvbGUiOiJTdXBlciBBZG1pbiIsInVzZXJJZCI6MTAwfQ.GSabKY2VneamVnRh7zAapw-_BhFnpBIc6gZQ--3x63w` },
+  // })
 
   useEffect(() => {
     if (!cookies.userToken) {
       dispatch(clearUser());
       navigate("/badpage");
     }
-    getData();
+    getData()
   }, [cookies.userToken]);
 
   const onLogout = useCallback(() => {
@@ -121,6 +111,7 @@ const UserList = () => {
   return (
     <Container>
       <Sidebar />
+
       <div className="flex flex-col w-full h-full m-5 ">
         <Navbar
           namePages={"User List"}

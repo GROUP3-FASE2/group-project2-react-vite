@@ -31,6 +31,7 @@ const MenteeLog = () => {
         setDetail(response.data.data);
       })
       .catch((error) => {
+        console.log(error)
       });
   };
 
